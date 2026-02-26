@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PWMsave – Eye-Friendly PC Displays</title>
+  <style>
+    /* ── Reset & Base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #f7f8fa;
+      --surface:   #ffffff;
+      --border:    #e4e7ec;
+      --text:      #1a1d23;
+      --muted:     #6b7280;
+      --accent:    #2563eb;
+      --accent-lt: #eff6ff;
+      --green:     #16a34a;
+      --radius:    12px;
+      --shadow:    0 2px 12px rgba(0,0,0,.07);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Header ── */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      height: 60px;
+      gap: 12px;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: -.5px;
+      color: var(--accent);
+    }
+    .logo span { color: var(--text); }
+    .tagline {
+      font-size: .8rem;
+      color: var(--muted);
+      border-left: 1px solid var(--border);
+      padding-left: 12px;
+      margin-left: 4px;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #1e40af 0%, #1d4ed8 50%, #2563eb 100%);
+      color: #fff;
+      text-align: center;
+      padding: 72px 24px 64px;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -.5px;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      max-width: 560px;
+      margin: 0 auto 28px;
+      font-size: 1.05rem;
+      opacity: .88;
+    }
+    .badge-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .badge {
+      background: rgba(255,255,255,.15);
+      border: 1px solid rgba(255,255,255,.25);
+      border-radius: 50px;
+      padding: 6px 16px;
+      font-size: .82rem;
+      font-weight: 500;
+    }
+
+    /* ── Why section ── */
+    .why {
+      max-width: 1100px;
+      margin: 56px auto 0;
+      padding: 0 24px;
+    }
+    .section-label {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 32px;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+    }
+    .feature-icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+    .feature-card h3 {
+      font-size: .95rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .feature-card p {
+      font-size: .84rem;
+      color: var(--muted);
+    }
+
+    /* ── Products ── */
+    .products {
+      max-width: 1100px;
+      margin: 56px auto 0;
+      padding: 0 24px;
+    }
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+    .product-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow .2s, transform .2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,.12);
+      transform: translateY(-3px);
+    }
+    .product-img {
+      aspect-ratio: 16/9;
+      background: #eef2f7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      position: relative;
+    }
+    .badge-top {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: .7rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 50px;
+    }
+    .badge-top.editors { background: #7c3aed; }
+    .badge-top.budget  { background: var(--green); }
+    .product-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .product-brand {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .product-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+    .product-desc {
+      font-size: .84rem;
+      color: var(--muted);
+      flex: 1;
+    }
+    .product-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .spec-tag {
+      background: var(--accent-lt);
+      color: var(--accent);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: .74rem;
+      font-weight: 600;
+    }
+    .product-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 20px;
+      border-top: 1px solid var(--border);
+    }
+    .product-price {
+      font-size: 1.15rem;
+      font-weight: 700;
+    }
+    .product-price small {
+      font-size: .75rem;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent);
+      color: #fff;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: .85rem;
+      font-weight: 600;
+      transition: background .15s;
+    }
+    .btn:hover { background: #1d4ed8; }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ── Disclaimer ── */
+    .disclaimer {
+      max-width: 1100px;
+      margin: 48px auto 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    .disclaimer strong { color: var(--text); }
+
+    /* ── Footer ── */
+    footer {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: .8rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--accent); }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .tagline { display: none; }
+      .hero { padding: 48px 20px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <div class="logo">PWM<span>save</span></div>
+      <div class="tagline">Curated eye-friendly displays</div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <h1>PC Monitors That Are Easy on Your Eyes</h1>
+    <p>Handpicked displays with flicker-free backlights, low blue light, and anti-glare coatings — so you can work longer without eye strain.</p>
+    <div class="badge-row">
+      <span class="badge">✓ Flicker-Free</span>
+      <span class="badge">✓ Low Blue Light</span>
+      <span class="badge">✓ Anti-Glare</span>
+      <span class="badge">✓ No PWM Dimming</span>
+    </div>
+  </section>
+
+  <!-- Why it matters -->
+  <section class="why">
+    <div class="section-label">Why it matters</div>
+    <h2 class="section-title">What makes a display eye-friendly?</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">🔆</div>
+        <h3>Flicker-Free Backlight</h3>
+        <p>DC dimming instead of PWM eliminates the imperceptible flicker that causes eye fatigue and headaches.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌙</div>
+        <h3>Low Blue Light Mode</h3>
+        <p>Hardware-level blue light filters reduce harmful short-wave blue light without a yellow tint.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🖥️</div>
+        <h3>Anti-Glare Coating</h3>
+        <p>Matte panels diffuse reflections so ambient light doesn't cause glare or reduce contrast.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>Accurate Color & Contrast</h3>
+        <p>IPS and OLED panels maintain natural colors at wide viewing angles, reducing eye adjustment strain.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="products">
+    <div class="section-label" style="margin-top:56px">Top Picks</div>
+    <h2 class="section-title">Best Eye-Friendly Monitors in 2025</h2>
+    <div class="product-grid">
+
+      <!-- BenQ EW2880U -->
+      <div class="product-card">
+        <div class="product-img">
+          🖥️
+          <span class="badge-top editors">Editor's Pick</span>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">BenQ</div>
+          <div class="product-name">EW2880U 28" 4K Eye-Care Monitor</div>
+          <div class="product-desc">BenQ's proprietary Eye-Care technology combines Brightness Intelligence Plus, Low Blue Light Plus, and a fully flicker-free backlight. Ideal for professionals who spend long hours in front of a screen.</div>
+          <div class="product-specs">
+            <span class="spec-tag">4K UHD</span>
+            <span class="spec-tag">IPS</span>
+            <span class="spec-tag">Flicker-Free</span>
+            <span class="spec-tag">Low Blue Light</span>
+            <span class="spec-tag">HDR10</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$399 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=BenQ+EW2880U" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- ASUS ProArt PA278CV -->
+      <div class="product-card">
+        <div class="product-img">
+          🖥️
+          <span class="badge-top">Top Rated</span>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">ASUS</div>
+          <div class="product-name">ProArt PA278CV 27" WQHD</div>
+          <div class="product-desc">TÜV Rheinland–certified flicker-free and Low Blue Light display. The 2560×1440 IPS panel delivers color accuracy with a Delta E &lt;2, making it perfect for creative work without compromising eye health.</div>
+          <div class="product-specs">
+            <span class="spec-tag">WQHD 1440p</span>
+            <span class="spec-tag">IPS</span>
+            <span class="spec-tag">TÜV Certified</span>
+            <span class="spec-tag">USB-C 90W</span>
+            <span class="spec-tag">sRGB 100%</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$309 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=ASUS+ProArt+PA278CV" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- LG 27UK850-W -->
+      <div class="product-card">
+        <div class="product-img">🖥️</div>
+        <div class="product-body">
+          <div class="product-brand">LG</div>
+          <div class="product-name">27UK850-W 27" 4K USB-C</div>
+          <div class="product-desc">LG's Reader Mode shifts the color temperature to reduce blue light, while the flicker-safe IPS panel handles 4K content beautifully. The USB-C port with 60W PD makes it a clean one-cable desk setup.</div>
+          <div class="product-specs">
+            <span class="spec-tag">4K UHD</span>
+            <span class="spec-tag">IPS</span>
+            <span class="spec-tag">Reader Mode</span>
+            <span class="spec-tag">USB-C 60W</span>
+            <span class="spec-tag">HDR10</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$349 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=LG+27UK850-W" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Dell UltraSharp U2722D -->
+      <div class="product-card">
+        <div class="product-img">🖥️</div>
+        <div class="product-body">
+          <div class="product-brand">Dell</div>
+          <div class="product-name">UltraSharp U2722D 27" WQHD</div>
+          <div class="product-desc">ComfortView Plus is a hardware solution that permanently reduces blue light emission without affecting color fidelity — no software filter needed. TÜV Rheinland Eye Comfort certified.</div>
+          <div class="product-specs">
+            <span class="spec-tag">WQHD 1440p</span>
+            <span class="spec-tag">IPS</span>
+            <span class="spec-tag">ComfortView+</span>
+            <span class="spec-tag">TÜV Certified</span>
+            <span class="spec-tag">USB-C 90W</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$429 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=Dell+UltraSharp+U2722D" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- BenQ GW2490 (budget) -->
+      <div class="product-card">
+        <div class="product-img">
+          🖥️
+          <span class="badge-top budget">Best Budget</span>
+        </div>
+        <div class="product-body">
+          <div class="product-brand">BenQ</div>
+          <div class="product-name">GW2490 24" FHD Eye-Care</div>
+          <div class="product-desc">An affordable entry point into flicker-free, low-blue-light computing. BenQ's Eye-Care suite and a neutral-grey anti-glare coating make this a great everyday monitor that won't break the bank.</div>
+          <div class="product-specs">
+            <span class="spec-tag">1080p FHD</span>
+            <span class="spec-tag">IPS</span>
+            <span class="spec-tag">Flicker-Free</span>
+            <span class="spec-tag">Anti-Glare</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$139 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=BenQ+GW2490" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- LG OLED 27GR95QE -->
+      <div class="product-card">
+        <div class="product-img">🖥️</div>
+        <div class="product-body">
+          <div class="product-brand">LG</div>
+          <div class="product-name">27GR95QE 27" OLED QHD</div>
+          <div class="product-desc">OLED panels are inherently flicker-free at all brightness levels and produce perfect blacks that reduce the contrast strain on your eyes. A premium choice for those who want the ultimate viewing comfort.</div>
+          <div class="product-specs">
+            <span class="spec-tag">QHD 1440p</span>
+            <span class="spec-tag">OLED</span>
+            <span class="spec-tag">0.03ms</span>
+            <span class="spec-tag">True Black</span>
+            <span class="spec-tag">240Hz</span>
+          </div>
+        </div>
+        <div class="product-footer">
+          <div class="product-price">~$699 <small>USD</small></div>
+          <a class="btn" href="https://www.amazon.com/s?k=LG+27GR95QE+OLED" target="_blank" rel="noopener noreferrer sponsored">
+            View on Amazon
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Disclaimer -->
+  <div class="disclaimer" style="max-width:1100px;margin:40px auto 0;padding:20px 24px;">
+    <strong>Affiliate Disclosure:</strong> PWMsave participates in the Amazon Associates affiliate program and other affiliate programs. If you click a link and make a purchase, we may earn a small commission at no extra cost to you. All product recommendations are made independently based on our research and editorial judgment. Prices listed are approximate and may vary.
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <span>© 2025 PWMsave — Eye-Friendly Display Reviews</span>
+    <span>Prices are approximate · <a href="https://www.amazon.com" target="_blank" rel="noopener noreferrer">Shop on Amazon</a></span>
+  </footer>
+
+</body>
+</html>
