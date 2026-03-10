@@ -1,48 +1,62 @@
 const displays = [
 	{
-		name: "BenQ GW2790QT 27\" QHD",
-		type: "IPS • QHD • 75Hz",
+		name: "Gigabyte M27UP 27\"",
+		type: "IPS • 4K • 160Hz",
 		image:
 			"https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?auto=format&fit=crop&w=1200&q=80",
 		description:
-			"A balanced productivity monitor focused on eye comfort with low blue light modes and flicker-free dimming.",
-		link: "https://www.amazon.com/s?k=BenQ+GW2790QT&tag=yourtag-20",
+			"Versatile 27-inch 4K monitor with high refresh rate, KVM convenience, and eye-care features for long mixed work and gaming sessions.",
+		link: "https://www.amazon.com/s?k=Gigabyte+M27UP&tag=yourtag-20",
 		pros: [
-			"Flicker-free backlight for reduced eye strain",
-			"Ergo stand with height, tilt, and pivot",
-			"QHD sharpness is comfortable for text-heavy work"
+			"4K sharpness improves text clarity for office use",
+			"High refresh rate feels smoother in motion-heavy content",
+			"Built-in KVM helps switch quickly between two systems"
 		],
-		cons: ["Not ideal for HDR content", "75Hz is smooth but not gaming-focused", "Mid-range brightness"]
+		cons: [
+			"May need scaling tweaks in some desktop apps",
+			"Premium features can increase price vs basic 27-inch monitors",
+			"Check exact regional specs before purchase"
+		]
 	},
 	{
-		name: "ASUS ProArt PA278QV 27\"",
-		type: "IPS • QHD • 75Hz",
+		name: "ASUS TUF Gaming VG27AQM1A 27\"",
+		type: "Fast IPS • QHD • bis zu 260Hz (OC)",
 		image:
 			"https://images.unsplash.com/photo-1585792180666-f7347c490ee2?auto=format&fit=crop&w=1200&q=80",
 		description:
-			"Creator-oriented display with strong factory calibration and an anti-glare panel that stays easy on the eyes.",
-		link: "https://www.amazon.com/s?k=ASUS+ProArt+PA278QV&tag=yourtag-20",
+			"Schneller 27-Zoll-QHD-Gaming-Monitor mit Fast-IPS-Panel, Adaptive-Sync, ELMB-Sync und starker Bewegungsdarstellung fuer kompetitives Spielen.",
+		link: "https://www.amazon.com/s?k=ASUS+TUF+Gaming+VG27AQM1A&tag=yourtag-20",
 		pros: [
-			"Excellent color consistency out of the box",
-			"Matte coating helps in bright rooms",
-			"ComfortView-style blue light controls"
+			"Hohe Bildwiederholrate fuer sehr fluessiges Gameplay",
+			"QHD-Aufloesung bietet gute Balance aus Scharfe und Performance",
+			"ELMB-Sync + Adaptive-Sync fuer weniger Tearing und Motion Blur",
+			"Gaming-Funktionen wie Variable Overdrive und Shadow Boost"
 		],
-		cons: ["No USB-C power delivery", "Design is functional, not ultra-thin", "Speakers are basic"]
+		cons: [
+			"Kein 4K, daher weniger Pixel-Schaerfe als UHD-Modelle",
+			"Fuer Office-Use oft ueberdimensioniert",
+			"HDR eher Basisniveau im Vergleich zu High-End-HDR",
+			"Je nach Setup Feintuning bei Overdrive empfohlen"
+		]
 	},
 	{
-		name: "Dell UltraSharp U2723QE 27\"",
-		type: "IPS Black • 4K • 60Hz",
+		name: "HP Omen 27q 27\"",
+		type: "IPS • QHD • 165Hz",
 		image:
 			"https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
 		description:
-			"Premium office monitor with excellent text clarity and comfort settings for long work sessions.",
-		link: "https://www.amazon.com/s?k=Dell+U2723QE&tag=yourtag-20",
+			"Often mentioned on Reddit as an eyestrain-friendly favorite thanks to balanced brightness behavior and solid motion handling, but it may not work for everyone.",
+		link: "https://www.amazon.com/s?k=HP+Omen+27q&tag=yourtag-20",
 		pros: [
-			"4K clarity reduces text fuzziness",
-			"Strong USB-C hub keeps desk setup minimal",
-			"Reliable low blue light and flicker control"
+			"Beliebtes Community-Modell fuer Nutzer mit empfindlichen Augen",
+			"QHD bei 27 Zoll bietet gute Schaerfe ohne starke Skalierung",
+			"165Hz sorgt fuer ruhigeres Scrolling und Gameplay"
 		],
-		cons: ["Higher price point", "60Hz may feel limited for fast gaming", "Black levels still IPS-like in dark rooms"]
+		cons: [
+			"may not work for everyone",
+			"Kein 4K fuer maximale Textschaerfe",
+			"Augenkomfort ist subjektiv und haengt stark von Helligkeits-Setup ab"
+		]
 	}
 ];
 
